@@ -22,7 +22,7 @@ int main() {
     }
     if (finalIndex > 0) {
         cout << array[startIndex] << " + " <<array[finalIndex];
-        cout << " = " << resultSummary;
+        cout << " = " << resultSummary << endl;
     } else {
         cerr << "Не найдено\n";
     }

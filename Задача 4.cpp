@@ -21,6 +21,5 @@ int main() {
     for (int i: array) cout << i << " ";
     cout << "]\n";
 
-
     return 0;
 }

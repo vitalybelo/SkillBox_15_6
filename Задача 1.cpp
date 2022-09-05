@@ -27,7 +27,7 @@ int main() {
             }
         }
     }
-    cout << startIndex << " " << finalIndex;
+    cout << startIndex << " " << finalIndex << endl;
 
     return 0;
 }
