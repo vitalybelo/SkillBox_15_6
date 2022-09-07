@@ -2,39 +2,79 @@
 #include <vector>
 using namespace std;
 
+void printArray (vector<int>& array);
+bool entryDataArray (vector<int>& array);
+bool entryDataArray (vector<int>& array, vector<int>& buffer, int size);
+
 int main() {
     setlocale(LC_ALL, "Russian_Russia.1251");
-    //vector<int> array {-100,-77, -50, -24, -17, -13, -9, -5, -2, -1, 1, 7, 9, 10, 15};
-    //vector<int> array {-100,-88, -63, -50, -15, -11, -10, -5};
-    //vector<int> array { 10, 15, 25, 40, 50, 55, 61, 72, 100};
-    vector<int> result;
+    vector<int> array;
+    vector<int> buffer;
 
-    int indexMin = 0;
-    int size = (int) array.size();
+    while (entryDataArray(array, buffer, 5)) {
 
-    for (int i = 1; i < size; i++)
-        if (abs(array[i]) < abs(array[indexMin])) indexMin = i;
-    result.push_back(array[indexMin]);
-
-    int indexL = indexMin - 1;
-    int indexR = indexMin + 1;
-    while (indexL >= 0 && indexR < size) {
-        if (abs(array[indexL]) < abs(array[indexR])) {
-            result.push_back(array[indexL--]);
-            result.push_back(array[indexR++]);
+        if (array.size() < 5) {
+            cout << "Нет 5-го элемента :: ";
         } else {
-            result.push_back(array[indexR++]);
-            result.push_back(array[indexL--]);
+            cout << "Пятый элемент = " << buffer[4] << " :: ";
+        }
+        printArray(buffer);
+        printArray(array);
+    };
+    cout << "Завершение программы\n";
+    return 0;
+}
+
+void printArray (vector<int>& array) {
+    cout << "{";
+    for (int i: array) cout << i << ",";
+    cout << "}\n";
+}
+
+void LRUcache (int value, vector<int>& buffer, int sizeBuffer) {
+
+    if (buffer.empty() || buffer[buffer.size() - 1] <= value)
+        buffer.push_back(value);
+    else {
+        for (auto iter = buffer.begin(); iter < buffer.end(); iter++) {
+            if (value <= *iter) {
+                buffer.insert(iter,value);
+                break;
+            }
         }
     }
-    while (indexL >= 0)
-        result.push_back(array[indexL--]);
-    while (indexR < size)
-        result.push_back(array[indexR++]);
+    if (buffer.size() > sizeBuffer) buffer.resize(5);
+}
 
-    cout << "{ ";
-    for (int i: result) cout << i << " ";
-    cout << "}\n";
+bool entryDataArray (vector<int>& array, vector<int>& buffer, int size) {
+    int inputValue;
+    cout << "Ввод: ";
+    do {
+        cin >> inputValue;
+        if (inputValue >= 0) {
+            array.push_back(inputValue);
+            LRUcache(inputValue, buffer, size);
+        }
+    } while (inputValue >= 0);
+    return (inputValue != -2);
+}
 
-    return 0;
+bool entryDataArray (vector<int>& array) {
+    int inputValue;
+    cout << "Ввод: ";
+    do {
+        cin >> inputValue;
+        if (inputValue >= 0) {
+            if (array.empty() || array[array.size() - 1] <= inputValue) {
+                array.push_back(inputValue);
+            } else {
+                for (auto iter = array.begin(); iter < array.end(); iter++)
+                    if (inputValue <= *iter) {
+                        array.insert(iter,1,inputValue);
+                        break;
+                    }
+            }
+        }
+    } while (inputValue >= 0);
+    return (inputValue != -2);
 }
