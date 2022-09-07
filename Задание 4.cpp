@@ -3,8 +3,7 @@
 using namespace std;
 
 int main() {
-    setlocale(LC_ALL, "Russian_Russia.1251");
-    //vector<int> array {-100,-77, -50, -24, -17, -13, -9, -5, -2, -1, 1, 7, 9, 10, 15};
+    vector<int> array {-100,-77, -50, -24, -17, -13, -9, -5, -2, -1, 1, 7, 9, 10, 15};
     //vector<int> array {-100,-88, -63, -50, -15, -11, -10, -5};
     //vector<int> array { 10, 15, 25, 40, 50, 55, 61, 72, 100};
     vector<int> result;
