@@ -7,7 +7,6 @@ bool entryDataArray (vector<int>& array);
 bool entryDataArray (vector<int>& array, vector<int>& buffer, int size);
 
 int main() {
-    setlocale(LC_ALL, "Russian_Russia.1251");
     vector<int> array;
     vector<int> buffer;
 
