@@ -21,7 +21,6 @@ int main() {
         printArray(buffer);
         printArray(array);
     };
-    cout << "Завершение программы\n";
     return 0;
 }
 
@@ -43,7 +42,7 @@ void LRUcache (int value, vector<int>& buffer, int sizeBuffer) {
             }
         }
     }
-    if (buffer.size() > sizeBuffer) buffer.resize(5);
+    if (buffer.size() > sizeBuffer) buffer.resize(sizeBuffer);
 }
 
 bool entryDataArray (vector<int>& array, vector<int>& buffer, int size) {
