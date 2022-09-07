@@ -12,14 +12,14 @@ int main() {
     vector<int> buffer;
 
     while (entryDataArray(array, buffer, 5)) {
-
-        if (array.size() < 5) {
-            cout << "Нет 5-го элемента :: ";
-        } else {
-            cout << "Пятый элемент = " << buffer[4] << " :: ";
-        }
-        printArray(buffer);
         printArray(array);
+        if (buffer.size() < 5) {
+            cout << " Нет 5-го элемента :: ";
+        } else {
+            cout << " Пятый элемент = " << buffer[4] << " :: ";
+        }
+        cout << " Buffer = ";
+        printArray(buffer);
     };
     return 0;
 }
@@ -30,7 +30,7 @@ void printArray (vector<int>& array) {
     cout << "}\n";
 }
 
-void LRUcache (int value, vector<int>& buffer, int sizeBuffer) {
+void putInBufferRiseUP (int value, vector<int>& buffer, int sizeBuffer) {
 
     if (buffer.empty() || buffer[buffer.size() - 1] <= value)
         buffer.push_back(value);
@@ -52,7 +52,7 @@ bool entryDataArray (vector<int>& array, vector<int>& buffer, int size) {
         cin >> inputValue;
         if (inputValue >= 0) {
             array.push_back(inputValue);
-            LRUcache(inputValue, buffer, size);
+            putInBufferRiseUP(inputValue, buffer, size);
         }
     } while (inputValue >= 0);
     return (inputValue != -2);
@@ -63,17 +63,9 @@ bool entryDataArray (vector<int>& array) {
     cout << "Ввод: ";
     do {
         cin >> inputValue;
-        if (inputValue >= 0) {
-            if (array.empty() || array[array.size() - 1] <= inputValue) {
-                array.push_back(inputValue);
-            } else {
-                for (auto iter = array.begin(); iter < array.end(); iter++)
-                    if (inputValue <= *iter) {
-                        array.insert(iter,1,inputValue);
-                        break;
-                    }
-            }
-        }
+        if (inputValue >= 0)
+            putInBufferRiseUP(inputValue, array, INT32_MAX);
+
     } while (inputValue >= 0);
     return (inputValue != -2);
 }
